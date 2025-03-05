@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caesar Cipher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+        }
+
+        .result label {
+            font-weight: bold;
+        }
+
+        .result p {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Caesar Cipher</h2>
+    
+    <!-- Form for Caesar Cipher -->
+    <form id="caesarForm">
+        <label for="plain_text">Enter Text:</label>
+        <input type="text" id="plain_text" name="plain_text" required>
+
+        <label for="key">Enter Key (Shift):</label>
+        <input type="number" id="key" name="key" required>
+
+        <button type="submit">Encrypt Text</button>
+    </form>
+
+    <!-- Result Section -->
+    <div class="result">
+        <label for="encrypted_message">Encrypted Message:</label>
+        <p id="encrypted_message"></p>
+    </div>
+
+    <form id="caesarDecryptForm" style="margin-top: 20px;">
+        <label for="cipher_text">Enter Cipher Text (for Decryption):</label>
+        <input type="text" id="cipher_text" name="cipher_text" required>
+
+        <label for="decrypt_key">Enter Key (Shift) for Decryption:</label>
+        <input type="number" id="decrypt_key" name="decrypt_key" required>
+
+        <button type="submit">Decrypt Text</button>
+    </form>
+
+    <div class="result">
+        <label for="decrypted_message">Decrypted Message:</label>
+        <p id="decrypted_message"></p>
+    </div>
+</div>
+
+<script>
+    // Function to handle encryption form submission
+    document.getElementById("caesarForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        const plainText = document.getElementById("plain_text").value;
+        const key = document.getElementById("key").value;
+        
+        fetch("http://127.0.0.1:5000/api/caesar/encrypt", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "plain_text": plainText,
+                "key": key
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("encrypted_message").textContent = data.encrypted_message;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+
+    // Function to handle decryption form submission
+    document.getElementById("caesarDecryptForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        const cipherText = document.getElementById("cipher_text").value;
+        const key = document.getElementById("decrypt_key").value;
+        
+        fetch("http://127.0.0.1:5000/api/caesar/decrypt", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "cipher_text": cipherText,
+                "key": key
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("decrypted_message").textContent = data.decrypted_message;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+</script>
+
+</body>
+</html>
