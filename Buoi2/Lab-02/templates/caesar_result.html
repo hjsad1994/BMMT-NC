@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caesar Cipher Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f7fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            margin-top: 50px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h4 {
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        strong {
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .container p {
+            font-size: 1.2rem;
+        }
+
+        .container {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .btn-back {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.1rem;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .btn-back:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h4>Caesar Cipher Result</h4>
+        <p><strong>Text:</strong> {{ text }}</p>
+        <p><strong>Key:</strong> {{ key }}</p>
+        <p><strong>Encrypted Text:</strong> {{ encrypted_text }}</p>
+        <a href="/" class="btn-back">Back to Home</a>
+    </div>
+</body>
+</html>
