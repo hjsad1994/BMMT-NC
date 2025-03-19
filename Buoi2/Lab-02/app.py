@@ -3,7 +3,7 @@ from cipher.caesar import CaesarCipher
 from cipher.playfair.playfair_cipher import PlayFairCipher
 from cipher.vigenere.vigenere_cipher import VigenereCipher
 from cipher.railfence.railfence_cipher import RailFenceCipher
-from cipher.transposition.transposition_cipher import TranspositionCipher  # Thêm dòng này
+from cipher.transposition.transposition_cipher import TranspositionCipher 
 
 app = Flask(__name__)
 
@@ -24,7 +24,8 @@ def caesar_encrypt():
     Caesar = CaesarCipher()
     
     encrypted_text = Caesar.encrypt_text(text, key)
-    return f"text: {text}<br>key: {key}<br>encrypted text: {encrypted_text}"
+    return render_template('caesar_result.html', text=text, key=key, encrypted_text=encrypted_text)
+#    return f"text: {text}<br>key: {key}<br>encrypted text: {encrypted_text}"
 
 @app.route("/decrypt", methods=['POST'])
 def caesar_decrypt():
