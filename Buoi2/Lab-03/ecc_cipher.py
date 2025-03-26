@@ -13,7 +13,7 @@ class MyApp(QMainWindow):
         self.ui.btn_verify.clicked.connect(self.call_api_verify)
 
     def call_api_gen_keys(self):
-        url = "http://127.0.0.1:5000/api/ecc/generate_keys"
+        url = "http://127.0.0.1:5001/api/ecc/generate_keys"
         try:
             response = requests.get(url)
             if response.status_code == 200:
@@ -27,7 +27,7 @@ class MyApp(QMainWindow):
             print(f"Error: {e.message}")
 
     def call_api_sign(self):
-        url = "http://127.0.0.1:5000/api/ecc/sign"
+        url = "http://127.0.0.1:5001/api/ecc/sign"
         payload = {
             "message": self.ui.txt_info.toPlainText(),
         }
@@ -45,7 +45,7 @@ class MyApp(QMainWindow):
             print(f"Error: {e.message}")
 
     def call_api_verify(self):
-        url = "http://127.0.0.1:5000/api/ecc/verify"
+        url = "http://127.0.0.1:5001/api/ecc/verify"
         payload = {
             "message": self.ui.txt_info.toPlainText(),
             "signature": self.ui.txt_sign.toPlainText(),
